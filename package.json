@@ -9,6 +9,7 @@
   "author": "rajinder singh sodhi",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "https": "^1.0.0",
