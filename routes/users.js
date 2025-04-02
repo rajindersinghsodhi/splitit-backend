@@ -1,21 +1,16 @@
 import { Router } from "express";
+import { addUser, deleteUser, getUser, getUsers, updateUser } from "../controllers/users.js";
 
 const userRoutes = Router();
 
-userRoutes.get("/", (req, res) => {
-    res.send(`<h1>This will fetch all users</h1>`)
-})
+userRoutes.get("/", getUsers);
 
-userRoutes.post("/", (req, res) => {
-    res.send(`<h1>This will post a user</h1>`)
-})
+userRoutes.get("/:userId", getUser);
 
-userRoutes.put("/", (req, res) => {
-    res.send(`<h1>This will update user</h1>`)
-})
+userRoutes.post("/", addUser);
 
-userRoutes.delete("/", (req, res) => {
-    res.send(`<h1>This will delete user</h1>`)
-})
+userRoutes.put("/:userId", updateUser);
+
+userRoutes.delete("/:userId", deleteUser);
 
 export { userRoutes };
