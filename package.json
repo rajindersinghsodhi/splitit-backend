@@ -1,0 +1,11 @@
+{
+  "name": "splitit-backend",
+  "version": "1.0.0",
+  "description": "split your payments using splitit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rajinder singh sodhi",
+  "license": "ISC"
+}
