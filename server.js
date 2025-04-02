@@ -1,7 +1,10 @@
 import express from "express";
-import { createServer } from 'https';
+import { createServer } from "http";
+import { userRoutes } from "./routes/users.js";
 
 const app = express();
 const server = createServer(app);
 
-export { app, server }
+app.use("/api/v1/users", userRoutes)
+
+export { app, server };

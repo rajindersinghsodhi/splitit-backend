@@ -1,6 +1,6 @@
-import { server } from './server.js';
-import { connectDB } from './config/db.js';
-import { PORT } from './config/env.js';
+import { server } from "./server.js";
+import { connectDB } from "./config/db.js";
+import { PORT } from "./config/env.js";
 
 const startServer = async () => {
     await connectDB();
