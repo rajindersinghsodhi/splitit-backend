@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { createUser, deleteUser, login, updateUser } from "../controllers/users.js";
+import { signup, deleteUser, login, updateUser } from "../controllers/users.js";
 import { authentication } from "../middlewares/authentication.js";
 
 const userRoutes = Router();
 
-userRoutes.post("/signup", createUser);
+userRoutes.post("/signup", signup);
 
 userRoutes.post("/login", login);
 

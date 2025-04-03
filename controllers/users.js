@@ -2,7 +2,8 @@ import bcrypt from "bcryptjs";
 import { User } from "../models/user.js";
 import { generateToken } from "../config/token.js";
 
-const createUser = async (req, res) => {
+// logic for user signup
+const signup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
         const hashPassword = await bcrypt.hash(password, 10);
@@ -10,6 +11,13 @@ const createUser = async (req, res) => {
         const result = await User.create({ name, email, password: hashPassword });
         
         const token = generateToken({userId: result._id});
+        
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "Strict",
+            maxAge: 24 * 60 * 60 * 1000
+        })
         
         return res.status(201).json({
             status: "success",
@@ -31,15 +39,7 @@ const createUser = async (req, res) => {
     }
 };
 
-const getUsers = (req, res) => {
-    res.status(200).json(
-        {
-            status: "success",
-            message: "I will give you data of all users"
-        }
-    );
-};
-
+// logic for user login
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -77,6 +77,17 @@ const login = async (req, res) => {
     }
 };
 
+// logic to update user details
+const getUsers = (req, res) => {
+    res.status(200).json(
+        {
+            status: "success",
+            message: "I will give you data of all users"
+        }
+    );
+};
+
+
 
 
 const updateUser = (req, res) => {
@@ -97,4 +108,4 @@ const deleteUser = (req, res) => {
     );
 };
 
-export { login, getUsers, createUser, deleteUser, updateUser };
+export { login, getUsers, signup, deleteUser, updateUser };
