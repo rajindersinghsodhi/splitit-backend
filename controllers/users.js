@@ -61,8 +61,15 @@ const login = async (req, res) => {
                 message: "incorrect password"
             })
         }
+        
+        const token = generateToken({userId: existingUser._id});
 
-        const token = generateToken(email);
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "Strict",
+            maxAge: 24 * 60 * 60 * 1000
+        })
         
         return res.status(200).json({
             status: "success",
