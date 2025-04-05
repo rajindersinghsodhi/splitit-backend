@@ -11,7 +11,7 @@ const createTodo = async (req, res) => {
             })
         }
 
-        const result = await Todo.create({ title, description, dueDate });
+        const result = await Todo.create({ title, description, dueDate, user: req.user._id });
 
         return res.status(201).json({
             status: "success",
@@ -29,7 +29,7 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
     try {
-        const todosData = await Todo.find({});
+        const todosData = await Todo.find({user: req.user._id});
 
         if(todosData.length === 0){
             return res.status(200).json({

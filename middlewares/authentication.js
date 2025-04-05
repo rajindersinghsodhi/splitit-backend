@@ -9,7 +9,7 @@ const authentication = async (req, res, next) => {
         if(!token){
             return res.status(401).json({
                 status: "error",
-                message: "Access denied, no token provided"
+                message: "Access denied. Please login to continue"
             })
         }
 
@@ -20,7 +20,7 @@ const authentication = async (req, res, next) => {
         if(!userDetails){
             return res.status(401).json({
                 status: "error",
-                message: "Invalid token"
+                message: "Access denied. Please login to continue"
             })
         }
         
