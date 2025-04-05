@@ -1,3 +1,4 @@
+import { response } from "express";
 import { Todo } from "../models/todo.js";
 
 const createTodo = async (req, res) => {
@@ -56,7 +57,7 @@ const getTodo = async (req, res) => {
     try {
         const todoId = req.params.todoId;
 
-        const todoData = await Todo.findOne({ _id: todoId });
+        const todoData = await Todo.findOne({ _id: todoId, user: req.user._id });
 
         if(!todoData){
             return res.status(404).json({
@@ -79,4 +80,33 @@ const getTodo = async (req, res) => {
     }
 }
 
-export { createTodo, getTodos, getTodo };
+const updateTodo = async (req, res) => {
+    try {
+        const updateData = req.body;
+        const todoId = req.params.todoId;
+
+        const todoData = await Todo.findOneAndUpdate({ _id: todoId, user: req.user._id }, updateData, {new: true});
+
+        if(!todoData){
+            return res.status(404).json({
+                status: "error",
+                message: "todo not found"
+            })
+        }
+
+        return res.status(200).json({
+            status: "success",
+            message: "todo updated successfully",
+            todoData: todoData
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "error in updating todo",
+            error: error.message
+        })
+    }
+}
+
+export { createTodo, getTodos, getTodo, updateTodo };
