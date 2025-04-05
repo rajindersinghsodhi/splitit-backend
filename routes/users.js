@@ -8,8 +8,8 @@ userRoutes.post("/signup", signup);
 
 userRoutes.post("/login", login);
 
-userRoutes.put("/:userId", authentication, updateUser);
+userRoutes.patch("/:userId", authentication, updateUser);
 
-userRoutes.delete("/:userId", deleteUser);
+userRoutes.delete("/:userId", authentication, deleteUser);
 
 export { userRoutes };
