@@ -27,4 +27,29 @@ const createTodo = async (req, res) => {
     }
 }
 
-export { createTodo };
+const getTodos = async (req, res) => {
+    try {
+        const todosData = await Todo.find({});
+
+        if(todosData.length === 0){
+            return res.status(200).json({
+                status: "success",
+                message: "no todos available",
+                todosData: todosData
+            })
+        }
+        return res.status(200).json({
+            status: "success",
+            message: "todos fetched successfully",
+            todosData: todosData 
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "error in fetching todos",
+            error: error.message
+        })
+    }
+}
+
+export { createTodo, getTodos };
