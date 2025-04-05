@@ -29,7 +29,7 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
     try {
-        const todosData = await Todo.find({user: req.user._id});
+        const todosData = await Todo.find({ user: req.user._id });
 
         if(todosData.length === 0){
             return res.status(200).json({
@@ -52,4 +52,31 @@ const getTodos = async (req, res) => {
     }
 }
 
-export { createTodo, getTodos };
+const getTodo = async (req, res) => {
+    try {
+        const todoId = req.params.todoId;
+
+        const todoData = await Todo.findOne({ _id: todoId });
+
+        if(!todoData){
+            return res.status(404).json({
+                status: "error",
+                message: "todo not found"
+            })
+        }
+
+        return res.status(200).json({
+            status: "success",
+            message: "todo fetched successfully",
+            todoData: todoData
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "error",
+            message: "error in fetching todo",
+            error: error.message
+        })
+    }
+}
+
+export { createTodo, getTodos, getTodo };
