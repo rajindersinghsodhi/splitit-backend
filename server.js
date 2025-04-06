@@ -1,8 +1,8 @@
 import express from "express";
 import { createServer } from "http";
-import { userRoutes } from "./routes/users.js";
+import { userRoutes } from "./routes/v1/users.js";
 import cookieParser from "cookie-parser";
-import { todoRoutes } from "./routes/todos.js";
+import { todoRoutes } from "./routes/v1/todos.js";
 
 const app = express();
 const server = createServer(app);
