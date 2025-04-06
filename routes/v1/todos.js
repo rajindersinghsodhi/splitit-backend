@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authentication } from "../middlewares/authentication.js";
-import { createTodo, deleteTodo, getTodo, getTodos, updateTodo } from "../controllers/todos.js";
+import { createTodo, deleteTodo, getTodo, getTodos, updateTodo } from "../controllers/v1/todos.js";
 
 const todoRoutes = Router();
 

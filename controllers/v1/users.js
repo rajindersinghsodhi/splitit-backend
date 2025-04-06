@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
-import { User } from "../models/user.js";
-import { generateToken } from "../config/token.js";
-import { Todo } from "../models/todo.js";
+import { User } from "../../models/user.js";
+import { generateToken } from "../../config/token.js";
+import { Todo } from "../../models/todo.js";
 
 // logic for user signup
 const signup = async (req, res) => {
